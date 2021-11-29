@@ -29,7 +29,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/backgroundcsc"
         android:gravity="center"
-        android:text="Chuyến của tôi"
+        android:text="Thêm chuyến"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

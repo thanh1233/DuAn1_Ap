@@ -13,6 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
     private  static  int SPLASH_SCREEN = 5000;
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         //Animain
         topAin = AnimationUtils.loadAnimation(this,R.anim.top_amnimaton);
         bottomAni = AnimationUtils.loadAnimation(this,R.anim.bottom_amition);
@@ -53,4 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

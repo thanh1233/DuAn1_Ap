@@ -13,6 +13,27 @@
         <entry key="..\:/ApVeXe/app/src/main/res/layout/fag_home.xml" value="0.25" />
         <entry key="..\:/ApVeXe/app/src/main/res/layout/fag_nhantin.xml" value="0.25" />
         <entry key="..\:/ApVeXe/app/src/main/res/menu/drawer_menu.xml" value="0.1" />
+        <entry key="..\:/DuanThanh/app/src/main/res/drawable-v24/backgroundcsc.xml" value="0.2101851851851852" />
+        <entry key="..\:/DuanThanh/app/src/main/res/drawable-v24/button_bg.xml" value="0.2101851851851852" />
+        <entry key="..\:/DuanThanh/app/src/main/res/drawable/background_edttextdox.xml" value="0.2101851851851852" />
+        <entry key="..\:/DuanThanh/app/src/main/res/drawable/button_bgv.xml" value="0.26666666666666666" />
+        <entry key="..\:/DuanThanh/app/src/main/res/drawable/ic_baseline_delete_sweep_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_capnhatthongtin.xml" value="0.246875" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_chuyencuatoi1.xml" value="0.23697916666666666" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_login.xml" value="0.246875" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_main.xml" value="0.2222222222222222" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_sig_up.xml" value="0.25" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_sua_nha_xe.xml" value="0.25" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_them_xe.xml" value="0.1" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_trang_chu.xml" value="0.136" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/activity_xemthongtin.xml" value="0.25" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/fag_home.xml" value="0.24444444444444444" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/fragment_chuyen_cua_toi.xml" value="0.25052083333333336" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/itemsanpham.xml" value="0.246875" />
+        <entry key="..\:/DuanThanh/app/src/main/res/layout/layout_header_nav.xml" value="0.2" />
+        <entry key="..\:/DuanThanh/app/src/main/res/menu/bottom_navigation.xml" value="0.12864583333333332" />
+        <entry key="..\:/DuanThanh/app/src/main/res/menu/drawer_menu.xml" value="0.24615384615384617" />
+        <entry key="..\:/DuanThanh/app/src/main/res/menu/menu_navicaysan.xml" value="0.24444444444444444" />
       </map>
     </option>
   </component>

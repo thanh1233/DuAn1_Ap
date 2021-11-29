@@ -1,24 +1,15 @@
-package com.example.apvexe.fragmant;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+package com.example.apvexe;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apvexe.NhaXeAdapter;
-import com.example.apvexe.R;
-import com.example.apvexe.ThemXe;
-import com.example.apvexe.Xe;
-import com.example.apvexe.chuyencuatoi1;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -26,60 +17,39 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class homefragmant extends Fragment {
-    View view;
+public class chuyencuatoi1 extends AppCompatActivity {
     private RecyclerView rcv;
     private String linkdatabase;
-    private TextView themxe;
     private DatabaseReference reference;
     private ArrayList<Xe> xeArrayList = new ArrayList<>();
-    private NhaXeAdapter nhaXeAdapter;
-    @Nullable
+    private NhaXeCuaToiAdapter nhaXeAdapter;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fag_home,container,false);
-        view.findViewById(R.id.themxe).setOnClickListener(new View.OnClickListener() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chuyencuatoi1);
+        findViewById(R.id.themxe).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), chuyencuatoi1.class));
+                startActivity(new Intent(chuyencuatoi1.this, ThemXe.class));
             }
         });
         linkdatabase = getResources().getString(R.string.link_RealTime_Database);
-        rcv = view.findViewById(R.id.rcv_NhaTro);
-        themxe = view.findViewById(R.id.themxe);
+        rcv = findViewById(R.id.rcv_NhaTro);
+        getSupportActionBar().setTitle("Danh sách chuyến của tôi");
         getLisviewDatabasefirebase("");
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        reference = FirebaseDatabase.getInstance(linkdatabase).getReference("users").child(user.getUid()).child("User");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String ktadmin = dataSnapshot.child("0").getValue(String.class);
-                if (ktadmin.equals("")) {
-                    themxe.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
-        nhaXeAdapter = new NhaXeAdapter();
-        nhaXeAdapter = new NhaXeAdapter(getActivity(), R.layout.itemsanpham, xeArrayList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        nhaXeAdapter = new NhaXeCuaToiAdapter();
+        nhaXeAdapter = new NhaXeCuaToiAdapter(chuyencuatoi1.this, R.layout.itemsanpham, xeArrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(chuyencuatoi1.this);
         rcv.setLayoutManager(linearLayoutManager);
         xeArrayList = new ArrayList<>();
         nhaXeAdapter.setData(xeArrayList);
         rcv.setAdapter(nhaXeAdapter);
-        return view;
     }
 
     private void getLisviewDatabasefirebase(String key) {
@@ -87,11 +57,11 @@ public class homefragmant extends Fragment {
         if (user == null) {
             return;
         }
-        reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Danhsachxe");
+        reference = FirebaseDatabase.getInstance(linkdatabase).getReference("users").child(user.getUid()).child("danhsachxecuatoi");
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-               Xe xe = snapshot.getValue(Xe.class);
+                Xe xe = snapshot.getValue(Xe.class);
                 if (xe != null) {
                     xeArrayList.add(xe);
                     nhaXeAdapter.notifyDataSetChanged();
@@ -117,7 +87,7 @@ public class homefragmant extends Fragment {
             @Override
             public void onChildRemoved(@NonNull  DataSnapshot snapshot) {
                 Xe xe = snapshot.getValue(Xe.class);
-                 if (xe == null || xeArrayList == null || xeArrayList.isEmpty()) {
+                if (xe == null || xeArrayList == null || xeArrayList.isEmpty()) {
                     return;
                 }
                 for (int i = 0; i < xeArrayList.size(); i++) {
@@ -140,5 +110,4 @@ public class homefragmant extends Fragment {
             }
         });
     }
-
 }

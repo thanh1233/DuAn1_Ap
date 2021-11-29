@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@tools:sample/first_names">
-
-    <!--now add some icons-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/thongke"
-            android:title="Chọn xe "
+            android:id="@+id/chonChuyen"
+            android:title="Chọn Chuyến"
             android:icon="@drawable/ic_baseline_home_24"
             />
 
         <item
-            android:id="@+id/khoanchi"
+            android:id="@+id/nhanTin"
             android:title="Nhắn Tin"
             android:icon="@drawable/ic_baseline_message_24"
             />
         <item
-            android:id="@+id/ghichu"
+            android:id="@+id/caiDat"
             android:title="Cài Đặt"
             android:icon="@drawable/ic_baseline_settings_24"
             />
