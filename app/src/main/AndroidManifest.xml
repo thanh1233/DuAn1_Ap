@@ -22,6 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ApVeXe">
         <activity
+            android:name=".hoadonadmin"
+            android:exported="false" />
+        <activity
+            android:name=".hoadoncuatoi"
+            android:exported="false" />
+        <activity
+            android:name=".thongke"
+            android:exported="false" />
+        <activity
             android:name=".Xemthongtin"
             android:exported="false" />
         <activity
