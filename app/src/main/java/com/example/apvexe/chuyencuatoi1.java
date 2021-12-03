@@ -41,6 +41,19 @@ public class chuyencuatoi1 extends AppCompatActivity {
         getSupportActionBar().setTitle("Danh sách chuyến của tôi");
         getLisviewDatabasefirebase("");
 
+        findViewById(R.id.thongke).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(chuyencuatoi1.this, thongke.class));
+            }
+        });
+
+        findViewById(R.id.duyetve).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(chuyencuatoi1.this, hoadonadmin.class));
+            }
+        });
 
 
         nhaXeAdapter = new NhaXeCuaToiAdapter();

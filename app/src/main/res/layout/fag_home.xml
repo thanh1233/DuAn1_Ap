@@ -21,6 +21,22 @@
 
     </RelativeLayout>
     <TextView
+        android:visibility="gone"
+        android:id="@+id/thanhtoancuatoi"
+        android:layout_width="172dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/backgroundcsc"
+        android:gravity="center"
+        android:text="Hóa đơn của tôi"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
         android:id="@+id/themxe"
         android:layout_width="172dp"
         android:layout_height="36dp"

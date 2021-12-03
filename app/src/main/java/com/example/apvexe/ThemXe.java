@@ -197,6 +197,10 @@ chongio();
                                 reference.child(""+ calendar.getTimeInMillis()).setValue(xe);
                                 reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Danhsachxe");
                                 reference.child(""+ calendar.getTimeInMillis()).setValue(xe);
+                                reference = FirebaseDatabase.getInstance(linkdatabase).getReference("users").child(user.getUid()).child("danhsachxecuatoi").child(""+ calendar.getTimeInMillis());
+                                reference.child("idnhaxe").setValue(user.getUid());
+                                reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Danhsachxe").child(""+ calendar.getTimeInMillis());
+                                reference.child("idnhaxe").setValue(user.getUid());
                                 startActivity(new Intent(ThemXe.this, TrangChu.class));
                                 finishAffinity();
                             }

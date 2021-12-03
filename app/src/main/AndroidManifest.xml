@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ApVeXe">
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
@@ -30,6 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+=======
+            android:name=".hoadonadmin"
+            android:exported="false" />
+        <activity
+            android:name=".hoadoncuatoi"
+            android:exported="false" />
+        <activity
+            android:name=".thongke"
+            android:exported="false" />
+>>>>>>> ec5ceef157dfc4f1ffa1e0b854282753a8a12e25
         <activity
             android:name=".Xemthongtin"
             android:exported="false" />

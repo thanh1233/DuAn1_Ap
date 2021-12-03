@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,6 +29,12 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Xemthongtin extends AppCompatActivity {
     private TextView tent, gia, thoigian, chuyen, thanhtoan, lienhe, datcoc, sdt, tento;
@@ -36,6 +43,7 @@ public class Xemthongtin extends AppCompatActivity {
     private DatabaseReference reference;
     int soluongve = 1;
     int tong = 0;
+    int Tongsove=0;
     private NumberFormat fm = new DecimalFormat("#,###");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +106,7 @@ public class Xemthongtin extends AppCompatActivity {
                 window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
                 window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setCancelable(false);
-                TextView tennhaxe, tuyen, ngaydi, giaven, tenkhach, ngaysinh, sdt, next, unnext, tongtien, soluong, thanhtoan, huy;
+                TextView tennhaxe, tuyen, ngaydi,tongso,idnhaxe, giaven, tenkhach, ngaysinh, sdt, next, unnext, tongtien, soluong, thanhtoan, huy;
                 tennhaxe = dialog.findViewById(R.id.tenhaxea);
                 tuyen = dialog.findViewById(R.id.tuyen);
                 ngaydi = dialog.findViewById(R.id.ngay);
@@ -112,6 +120,8 @@ public class Xemthongtin extends AppCompatActivity {
                 soluong = dialog.findViewById(R.id.soluong);
                 thanhtoan = dialog.findViewById(R.id.thanhtoanngay);
                 huy = dialog.findViewById(R.id.huybo);
+                tongso = dialog.findViewById(R.id.tongso);
+                idnhaxe = dialog.findViewById(R.id.idnhaxe);
                 soluongve = 1;
                 tong=0;
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -155,6 +165,7 @@ public class Xemthongtin extends AppCompatActivity {
                         ngaydi.setText("Ngày khởi hành:  " + ngaykhoihanh+ " vào lúc:  "+ giokhoihanh );
                         giaven.setText("Giá vé:  "+fm.format(giave)+ " VND ");
                         tong = giave;
+                        tongso.setText(""+soLuong);
                         tongtien.setText(""+fm.format(tong)+" VND ");
 
                     }
@@ -176,6 +187,12 @@ public class Xemthongtin extends AppCompatActivity {
                 next.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (Integer.parseInt(tongso.getText().toString().trim()) == 0) {
+                            tongtien.setText("Hết vé!");
+                            Toast.makeText(getApplicationContext(), "Hết vé", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         if (soluongve == 1) {
                             Toast.makeText(getApplicationContext(), "Đạt giới hạn nhỏ nhất", Toast.LENGTH_SHORT).show();
                             return;
@@ -201,6 +218,17 @@ public class Xemthongtin extends AppCompatActivity {
                 unnext.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (Integer.parseInt(tongso.getText().toString().trim()) == 0) {
+                            tongtien.setText("Hết vé!");
+                            Toast.makeText(getApplicationContext(), "Hết vé", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (soluongve == Integer.parseInt(tongso.getText().toString().trim())) {
+                            Toast.makeText(getApplicationContext(), "Đạt giới hạn lớn nhất", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         soluongve++;
                         soluong.setText(""+ soluongve);
                         reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Danhsachxe").child(value1);
@@ -228,7 +256,77 @@ public class Xemthongtin extends AppCompatActivity {
                 thanhtoan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Phần này tôi chịu, nhờ thầy bình nhé! =))", Toast.LENGTH_LONG).show();
+                        if (Integer.parseInt(tongso.getText().toString().trim()) == 0) {
+                            tongtien.setText("Hết vé!");
+                            Toast.makeText(getApplicationContext(), "Vé đã hết không thể thanh toán", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Tongsove = 0;
+                        Calendar calendar = Calendar.getInstance();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user == null) {
+                            return;
+                        }
+
+                        reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Danhsachxe").child(value1);
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String id = dataSnapshot.child("idnhaxe").getValue(String.class);
+                                int soLuong = dataSnapshot.child("soluongve").getValue(Integer.class);
+                                String iudnhaxe = dataSnapshot.child("idnhaxe").getValue(String.class);
+                                String diaiem = dataSnapshot.child("diemden").getValue(String.class);
+                                String tuyen = dataSnapshot.child("tuyenchay").getValue(String.class);
+                                String tennhaxe = dataSnapshot.child("ten").getValue(String.class);
+                                String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+                                Hoadon hoadon = new Hoadon();
+                                hoadon.setIdhd(""+ calendar.getTimeInMillis());
+                                hoadon.setIdkhach(user.getUid());
+                                hoadon.setIdnhaxe(id);
+                                hoadon.setTenkh(user.getDisplayName());
+                                hoadon.setTongtien(tongtien.getText().toString().trim());
+                                hoadon.setSoluongve(soluong.getText().toString().trim());
+                                hoadon.setTinhtrang("false");
+                                hoadon.setNgaymua(currentDate);
+                                hoadon.setTenxe(tennhaxe);
+                                hoadon.setDich(diaiem);
+                                hoadon.setTuyen(tuyen);
+                                Tongsove = soLuong - Integer.parseInt(soluong.getText().toString());
+                                tongso.setText(""+Tongsove);
+                                idnhaxe.setText(iudnhaxe);
+
+                                reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Hoadon");
+                                reference.child(""+ calendar.getTimeInMillis()).setValue(hoadon);
+
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+                        SweetAlertDialog pDialog = new SweetAlertDialog(Xemthongtin.this, SweetAlertDialog.PROGRESS_TYPE);
+                        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        pDialog.setTitleText("Đang thanh toán..");
+                        pDialog.setCancelable(false);
+                        pDialog.show();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                pDialog.dismiss();
+                                dialog.dismiss();
+                                reference = FirebaseDatabase.getInstance(linkdatabase).getReference("Danhsachxe").child(value1).child("soluongve");
+                                reference.setValue(Integer.parseInt(tongso.getText().toString().trim()));
+                                reference = FirebaseDatabase.getInstance(linkdatabase).getReference("users").child(""+idnhaxe.getText().toString().trim()).child("danhsachxecuatoi").child(value1).child("soluongve");
+                                reference.setValue(Integer.parseInt(tongso.getText().toString().trim()));
+
+                            }
+                        },3000);
+
+
                     }
                 });
 

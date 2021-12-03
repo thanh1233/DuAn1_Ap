@@ -19,6 +19,7 @@ import com.example.apvexe.R;
 import com.example.apvexe.ThemXe;
 import com.example.apvexe.Xe;
 import com.example.apvexe.chuyencuatoi1;
+import com.example.apvexe.hoadoncuatoi;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -35,7 +36,7 @@ public class homefragmant extends Fragment {
     View view;
     private RecyclerView rcv;
     private String linkdatabase;
-    private TextView themxe;
+    private TextView themxe, thanhtoancuatoi;
     private DatabaseReference reference;
     private ArrayList<Xe> xeArrayList = new ArrayList<>();
     private NhaXeAdapter nhaXeAdapter;
@@ -52,6 +53,13 @@ public class homefragmant extends Fragment {
         linkdatabase = getResources().getString(R.string.link_RealTime_Database);
         rcv = view.findViewById(R.id.rcv_NhaTro);
         themxe = view.findViewById(R.id.themxe);
+        thanhtoancuatoi = view.findViewById(R.id.thanhtoancuatoi);
+        thanhtoancuatoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), hoadoncuatoi.class));
+            }
+        });
         getLisviewDatabasefirebase("");
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -63,6 +71,7 @@ public class homefragmant extends Fragment {
                 String ktadmin = dataSnapshot.child("0").getValue(String.class);
                 if (ktadmin.equals("")) {
                     themxe.setVisibility(View.GONE);
+                    thanhtoancuatoi.setVisibility(View.VISIBLE);
                 }
             }
             @Override

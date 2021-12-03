@@ -20,19 +20,61 @@
             android:paddingTop="0dp" />
 
     </RelativeLayout>
-    <TextView
-        android:id="@+id/themxe"
-        android:layout_width="172dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/backgroundcsc"
-        android:gravity="center"
-        android:text="Thêm chuyến"
-        android:textColor="@color/white"
-        android:textStyle="bold"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/themxe"
+            android:layout_width="172dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/backgroundcsc"
+            android:gravity="center"
+            android:text="Thêm chuyến"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/thongke"
+            android:layout_width="172dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/backgroundcsc"
+            android:gravity="center"
+            android:text="Thống kê"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/duyetve"
+            android:layout_width="172dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/backgroundcsc"
+            android:gravity="center"
+            android:text="Duyệt vé"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
